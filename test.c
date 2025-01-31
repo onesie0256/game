@@ -6,8 +6,8 @@
 #include <SDL/SDL_gfxPrimitives.h>
 #include <SDL/SDL_net.h>
 
-#include "definitions.h"
-#include "colors.h"
+#include "src/definitions.h"
+#include "src/colors.h"
 
 SDL_bool is_in_square(SDL_Event event , int xStart , int yStart , int xEnd , int yEnd);
 
@@ -64,15 +64,15 @@ int title(SDL_Surface *window)
 
 
 
-    titleFont = TTF_OpenFont("./resources/font/azuki.ttf", TITLE_SIZE);
-    selectionsFont = TTF_OpenFont("./resources/font/azuki.ttf", 60);
+    titleFont = TTF_OpenFont("./assets/fonts/azuki.ttf", TITLE_SIZE);
+    selectionsFont = TTF_OpenFont("./assets/fonts/azuki.ttf", 60);
     
     
 
 
 
     Mix_Chunk *seClick1;
-    seClick1 = Mix_LoadWAV("./resources/SE/click1.wav");
+    seClick1 = Mix_LoadWAV("./assets/audio/se/click1.wav");
     if (seClick1 == NULL) {
         printf("効果音の読み込みに失敗しました: %s\n", Mix_GetError());
     }
@@ -132,7 +132,7 @@ int title(SDL_Surface *window)
 
                             SDL_Color titleStrColor = {0x00 , 0x00 , 0x00 , 0xff -  25 * i};
 
-                            strings = TTF_RenderUTF8_Blended(titleFont, TITLE_NAME , (SDL_Color){0x00, 0x00, 0x00, (0xff - 25 * i)});
+                            strings = TTF_RenderUTF8_Blended(titleFont, TITLE_NAME , titleStrColor);
                             strNewGame = TTF_RenderUTF8_Blended(selectionsFont, "新規ゲーム", colors_black);
                             strQuitGame = TTF_RenderUTF8_Blended(selectionsFont, "やめる", colors_black);
 
@@ -151,22 +151,22 @@ int title(SDL_Surface *window)
                             SDL_UpdateRect(window , 0 , 0 , SCREEN_WIDTH , SCREEN_HEIGHT);
                             SDL_Delay(50);
                         }
-                        
                         SDL_Delay(5);
                     }
-                else if(is_in_square(event , SCREEN_WIDTH * (5 / 8.0) , SCREEN_HEIGHT * (7 / 8.0) , SCREEN_WIDTH , SCREEN_HEIGHT)){
-                    Mix_PlayChannel(-1 , seClick1 , 2);
-                    for (int i = 1 ; i <= 10 ; i++){
-                    SDL_FillRect(window , NULL , SDL_MapRGB(window -> format , 240 - 24 * i , 255- 25 * i , 255- 25 * i));
-                    SDL_UpdateRect(window , 0 , 0 , SCREEN_WIDTH , SCREEN_HEIGHT);
-                    SDL_Delay(100);
-                }
-                return 0;
-                }
+                    else if(is_in_square(event , SCREEN_WIDTH * (5 / 8.0) , SCREEN_HEIGHT * (7 / 8.0) , SCREEN_WIDTH , SCREEN_HEIGHT)){
+                        Mix_PlayChannel(-1 , seClick1 , 2);
+                        for (int i = 1 ; i <= 10 ; i++){
+                        SDL_FillRect(window , NULL , SDL_MapRGB(window -> format , 240 - 24 * i , 255- 25 * i , 255- 25 * i));
+                        SDL_UpdateRect(window , 0 , 0 , SCREEN_WIDTH , SCREEN_HEIGHT);
+                        SDL_Delay(100);
+                    }
+                    return 0;
+                    }
                 break;
             }
         }
     }
+    return 0;
 }
 
 SDL_bool is_in_square(SDL_Event event , int xStart , int yStart , int xEnd , int yEnd)
