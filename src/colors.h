@@ -1,6 +1,6 @@
 #ifndef COLORS_H
 #define COLORS_H
-#include <SDL/SDL.h>
+#include "head.h"
 
 extern SDL_Color colors_white;//0xffffffff
 extern SDL_Color colors_black;//0x000000

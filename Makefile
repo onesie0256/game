@@ -1,36 +1,19 @@
-# コンパイラとフラグの設定
+# コンパイラ設定
 CC = gcc
-CFLAGS = -Wall -Werror -g
+CFLAGS = -Wall -I./src
 
-# ソースディレクトリとビルドディレクトリの設定
-SRC_DIR = src
-OBJ_DIR = obj
-#BIN_DIR = bin
-
-# ターゲットバイナリの設定
+# 全ての.cファイルを再帰的に検索
+SRCS = $(shell find . -name "*.c")
+# オブジェクトファイルのリスト作成
+OBJS = $(SRCS:.c=.o)
+# 実行ファイル名
 TARGET = game
 
-LIBDIR  = -lSDL -L/usr/lib -lSDL_gfx  -lSDL_ttf -lSDL_mixer
-
-# ソースファイルとオブジェクトファイルのリスト
-SRCS = $(wildcard $(SRC_DIR)/*.c) test.c
-OBJS = $(patsubst $(SRC_DIR)/%.c, $(OBJ_DIR)/%.o, $(SRCS))
-
-# デフォルトターゲット
-all: $(TARGET)
-
-# ターゲットバイナリのビルドルール
 $(TARGET): $(OBJS)
-	$(CC) $(CFLAGS) -o $@ $^ $(LIBDIR)
+	$(CC) $(OBJS) -o $(TARGET) -lSDL -lSDL_mixer -lSDL_ttf
 
-# オブジェクトファイルのビルドルール
-$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
-	@mkdir -p $(OBJ_DIR)
-	$(CC) $(CFLAGS) -c -o $@ $<
+%.o: %.c
+	$(CC) $(CFLAGS) -c $< -o $@
 
-# クリーンアップルール
 clean:
-	rm -rf $(OBJ_DIR)
-
-# .PHONYターゲット
-.PHONY: all clean
+	rm -f $(OBJS) $(TARGET)
