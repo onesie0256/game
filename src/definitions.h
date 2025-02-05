@@ -8,6 +8,6 @@
 #define TITLE_NAME "仮"
 #define TITLE_SIZE 120
 
-#define FPS 60
+#define FPS 60 //
 
 #endif

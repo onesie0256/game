@@ -17,7 +17,8 @@
                 "-L/usr/lib",
                 "-lSDL_gfx",
                 "-lSDL_ttf",
-                "-lSDL_mixer"
+                "-lSDL_mixer",
+                "-lSDL_image"
 
             ],
             "options": {

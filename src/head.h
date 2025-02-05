@@ -22,6 +22,7 @@
 
 //scenesディレクトリ
 #include "scenes/title.h"
+#include "scenes/main_game.h"
 
 //utilディレクトリ
 #include "util/image_utils.h"
@@ -33,5 +34,6 @@
 
 
 //グローバル変数の定義
+
 
 #endif

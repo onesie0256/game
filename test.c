@@ -7,7 +7,7 @@ int main(int argc , char *argv[])
     TTF_Init();
 
 
-
+    //SDL開始
     if(SDL_Init(SDL_INIT_EVERYTHING) < 0){
         printf("failed to initializde SDL \n");
         exit(-1);
@@ -18,11 +18,17 @@ int main(int argc , char *argv[])
         exit(-1);
     }
 
+
+    //ウィンドウ設定
     if ((window = SDL_SetVideoMode(SCREEN_WIDTH, SCREEN_HEIGHT, 32, SDL_SWSURFACE)) == NULL){
-        printf("failed to initialize videomode. \n%s\n" , Mix_GetError());
+        printf("failed to initialize window. \n%s\n" , Mix_GetError());
         exit(-1);
     }
-    //ウィンドウ設定
+    if ((buffer = SDL_CreateRGBSurface(SDL_HWSURFACE , SCREEN_WIDTH , SCREEN_HEIGHT , 32  , 0 , 0 , 0, 0)) == NULL){
+        printf("failed to initialize buffer. \n%s\n" , Mix_GetError());
+        exit(-1);
+    }
+    
     SDL_WM_SetCaption("test", "test");
     SDL_Surface *icon = SDL_LoadBMP("icon.bmp");
     if (icon == NULL) {
@@ -32,10 +38,18 @@ int main(int argc , char *argv[])
         //SDL_FreeSurface(icon);  // アイコンのサーフェスを解放
     }
     
-    title();
     
-    SDL_FreeSurface(window);
-    SDL_FreeSurface(icon);
+    
+    
+
+    int isLoop = title();
+    while (isLoop)
+    {
+        isLoop = main_game();
+        if (isLoop){
+            isLoop = title();
+        }
+    }
 
     SDL_Quit();
     SDL_QuitSubSystem(SDL_INIT_VIDEO);
