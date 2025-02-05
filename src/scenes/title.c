@@ -2,18 +2,16 @@
 
 int title(void)
 {
-    SDL_Surface *strings , *strNewGame , *strQuitGame;
+    SDL_Surface *strings , *strNewGame , *strQuitGame; 
 
     TTF_Font* titleFont , *selectionsFont;
     
     //図形描画
     SDL_FillRect(window , NULL , SDL_MapRGBA(window -> format , 240 , 255 , 255 , 150));
-    //rectangleColor(window , 0 , 0, SCREEN_WIDTH , SCREEN_HEIGHT , 0xaaaaaaff);
-    //boxColor(window, 0, 0, 320, 240, 0xaaaaaaff);
-    //stringColor(window , 150 , 70 , "TEST" , 0x00ffffff);
+    
 
 
-
+    //文字のフォント(仮)
     titleFont = TTF_OpenFont("./assets/fonts/azuki.ttf", TITLE_SIZE);
     selectionsFont = TTF_OpenFont("./assets/fonts/azuki.ttf", 60);
     
@@ -56,7 +54,7 @@ int title(void)
     
     //Mix_PlayChannel(1 , seClick1 , 1);
 
-    SDL_WM_IconifyWindow();
+    //SDL_WM_IconifyWindow();
     //SDL_Delay(10000);
     SDL_bool isLoop = SDL_TRUE;
     while(isLoop){
@@ -75,7 +73,7 @@ int title(void)
                         Mix_PlayChannel(-1 , seClick1 , 1);
 
 
-                        for (int i = 1 ; i <= 10 ; i++){
+                        /*for (int i = 1 ; i <= 10 ; i++){
                             SDL_FreeSurface(strings);
                             SDL_FreeSurface(strNewGame);
                             SDL_FreeSurface(strQuitGame);
@@ -101,6 +99,8 @@ int title(void)
                             SDL_UpdateRect(window , 0 , 0 , SCREEN_WIDTH , SCREEN_HEIGHT);
                             SDL_Delay(50);
                         }
+                        */
+                       
                         SDL_Delay(5);
                     }
                     else if(is_in_square(SCREEN_WIDTH * (5 / 8.0) , SCREEN_HEIGHT * (7 / 8.0) , SCREEN_WIDTH , SCREEN_HEIGHT)){

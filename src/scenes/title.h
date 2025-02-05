@@ -1,3 +1,6 @@
+/**
+ * タイトル関連
+ */
 #ifndef TITLE_H
 #define TITLE_H
 #include "../head.h"

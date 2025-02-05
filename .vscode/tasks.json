@@ -12,6 +12,7 @@
                 "${fileDirname}/**/**/*.c",
                 "-o",
                 "${fileDirname}/game",
+                "-I/usr/include/SDL2",
                 "-lSDL",
                 "-L/usr/lib",
                 "-lSDL_gfx",

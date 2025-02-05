@@ -1,3 +1,4 @@
+//いずれ消す
 #ifndef COLORS_H
 #define COLORS_H
 #include "head.h"

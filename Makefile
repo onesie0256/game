@@ -1,6 +1,6 @@
 # コンパイラ設定
 CC = gcc
-CFLAGS = -Wall -I./src
+CFLAGS = -Wall -I./src -I/usr/include/SDL2
 
 # 全ての.cファイルを再帰的に検索
 SRCS = $(shell find . -name "*.c")

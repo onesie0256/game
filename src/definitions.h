@@ -1,3 +1,4 @@
+//いずれ消す
 #ifndef DEFINITIONS_H
 #define DEFINITIONS_H
 
@@ -6,5 +7,7 @@
 
 #define TITLE_NAME "仮"
 #define TITLE_SIZE 120
+
+#define FPS 60
 
 #endif
