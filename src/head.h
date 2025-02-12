@@ -15,10 +15,14 @@
 #include <SDL/SDL_gfxPrimitives.h>
 #include <SDL/SDL_net.h>
 
+//objectディレクトリ
+#include "objects/player.h"
+
 //srcディレクトリ
 #include "colors.h"
 #include "definitions.h"
 #include "globals.h"
+#include "sprite.h"
 
 //scenesディレクトリ
 #include "scenes/title.h"

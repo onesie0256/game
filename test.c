@@ -5,7 +5,7 @@
 int main(int argc , char *argv[])
 {
     TTF_Init();
-
+    IMG_Init(IMG_INIT_PNG);
 
     //SDL開始
     if(SDL_Init(SDL_INIT_EVERYTHING) < 0){
@@ -51,8 +51,9 @@ int main(int argc , char *argv[])
         }
     }
 
+    SDL_QuitSubSystem(SDL_INIT_EVERYTHING);
     SDL_Quit();
-    SDL_QuitSubSystem(SDL_INIT_VIDEO);
+    
 }
 
 
