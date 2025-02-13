@@ -47,6 +47,13 @@ int title(void)
         SDL_Rect qg_src_rect = {0 , 0 , strQuitGame -> w , strQuitGame -> h};
         SDL_Rect qg_dst_rect = {SCREEN_WIDTH * (5 / 8.0) , SCREEN_HEIGHT * (7 / 8.0)};
 
+        /*SDL_SetColorKey(strings , SDL_SRCCOLORKEY , -1);
+        SDL_SetColorKey(strNewGame , SDL_SRCCOLORKEY , -1);
+        SDL_SetColorKey(strQuitGame , SDL_SRCCOLORKEY , -1);*/
+
+        strings = SDL_DisplayFormatAlpha(strings);
+        strNewGame = SDL_DisplayFormatAlpha(strNewGame);
+        strQuitGame = SDL_DisplayFormatAlpha(strQuitGame);
 
         SDL_BlitSurface(strings, &src_rect, window, &dst_rect);
         SDL_BlitSurface(strNewGame, &ng_src_rect, window, &ng_dst_rect);
@@ -80,17 +87,16 @@ int title(void)
 
                         for (int i = 1 ; i <= 100 ; i++){ //0.5秒かけて文字をスライド・透明化
                             
+                            int alpha = 255.0 - 2.5 * i;
 
                             //SDL_Color titleStrColor = {0x00 , 0x00 , 0x00 , 0xff -  2.5 * i};
-                            SDL_SetAlpha(strings , SDL_SRCALPHA , (int)(255.0 - 2.5 * i));
-                            SDL_SetAlpha(strNewGame , SDL_SRCALPHA , (int)(255.0 - 2.5 * i));
-                            SDL_SetAlpha(strQuitGame , SDL_SRCALPHA , (int)(255.0 - 2.5 * i));
+                            SDL_SetAlpha(strings , SDL_SRCALPHA , alpha);
+                            SDL_SetAlpha(strNewGame , SDL_SRCALPHA , alpha);
+                            SDL_SetAlpha(strQuitGame , SDL_SRCALPHA , alpha);
                             
 
                             /*
-                            SDL_SetColorKey(strings , SDL_SRCCOLORKEY , 0x0);
-                            SDL_SetColorKey(strNewGame , SDL_SRCCOLORKEY , 0x0);
-                            SDL_SetColorKey(strQuitGame , SDL_SRCCOLORKEY , 0x0);
+                            
 
                             strings = SDL_DisplayFormat(strings);
                             strNewGame = SDL_DisplayFormat(strQuitGame);

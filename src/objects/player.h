@@ -8,7 +8,7 @@ typedef struct player_{
     SDL_Rect *rect;
 
     //向き
-    //Directions direction;
+    int dire;
     
     SDL_Surface *playerTexture; //テクスチャ
     SDL_Rect *textureRect;
@@ -30,6 +30,8 @@ typedef struct player_{
 }Player;
 
 Player* load_player(void);
+
+void player_move(int dire);
 
 extern Player *player;
 #endif

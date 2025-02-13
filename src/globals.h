@@ -8,7 +8,7 @@ extern SDL_Surface *buffer; //バッファ
 
 extern SDL_Event event; //イベント
 
-
+extern int player_speed; //スピード
 
 extern uint16_t flameDlay;
 

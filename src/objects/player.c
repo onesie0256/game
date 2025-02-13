@@ -1,5 +1,7 @@
 #include "player.h"
 
+
+
 Player* load_player(void)
 {
     Player *p;
@@ -21,15 +23,42 @@ Player* load_player(void)
     p->textureRect = &(p->idleRect);
     //player -> direction = East;
 
-    p->playerTextureIdle = SDL_LoadBMP("tile_texture.bmp");
+    p->playerTextureIdle = SDL_LoadBMP("assets/img/player_test.bmp");
     if (p->playerTextureIdle == NULL) {
         printf("%s\n" , IMG_GetError());
-        //exit(-1);
+        exit(-1);
         SDL_Delay(100);
         return NULL;
     }
+    SDL_SetColorKey(p->playerTextureIdle , SDL_SRCCOLORKEY , -1);
+
     p->playerTexture = p->playerTextureIdle;
     p->idleFlameNum = 1;
 
     return p;
+}
+
+void player_move(int dire)
+{
+    switch (dire)
+    {
+    case East:
+        player->rect->x += player_speed;
+        break;
+    
+    case West:
+        player->rect->x -= player_speed;
+        break;
+
+    case North:
+        player->rect->y -= player_speed;
+        break;
+
+    case South:
+        player->rect->y += player_speed;
+        break;
+
+    default:
+        break;
+    }
 }

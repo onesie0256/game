@@ -9,4 +9,8 @@ SDL_Surface *buffer;
 
 SDL_Event event;
 
+int player_speed = 8;
+
 uint16_t flameDlay = 1000 / FPS;
+
+Player *player;

@@ -12,6 +12,28 @@ int main_game(void)
                 return 0;
                 break;
             
+            case SDL_KEYDOWN:
+                switch (event.key.keysym.sym)
+                {
+                case SDLK_d:
+                    player_move(East);
+                    break;
+                
+                case SDLK_a:
+                    player_move(West);
+                    break;
+
+                case SDLK_w:
+                    player_move(North);
+                    break;
+                
+                case SDLK_s:
+                    player_move(South);
+                    break;
+                
+                default:
+                    break;
+                }
             default:
                 break;
             }
@@ -25,7 +47,7 @@ int main_game(void)
 
 int load_main_game(void)
 {
-    Player *player = load_player();
+    player = load_player();
     sprite_init();
     add_middle(PLAYER , 1 , player->textureRect , player->rect , player->playerTexture);
     return 1;
