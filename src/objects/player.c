@@ -58,6 +58,26 @@ void player_move(int dire)
         player->rect->y += player_speed;
         break;
 
+    case NorthEast:
+        player->rect->x += player_speed;
+        player->rect->y -= player_speed;
+        break;
+
+    case NorthWest:
+        player->rect->x -= player_speed;
+        player->rect->y -= player_speed;
+        break;
+
+    case SouthEast:
+        player->rect->x += player_speed;
+        player->rect->y += player_speed;
+        break;
+
+    case SouthWest:
+        player->rect->x -= player_speed;
+        player->rect->y += player_speed;
+        break;
+
     default:
         break;
     }
