@@ -21,10 +21,10 @@
 #include "globals.h"
 #include "sprite.h"
 #include "map.h"
-#include "tiles.h"
 
 //objectディレクトリ
 #include "objects/player.h"
+#include "objects/tiles.h"
 
 
 
