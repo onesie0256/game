@@ -60,6 +60,7 @@ int load_main_game(void)
 {
     player = load_player();
     sprite_init();
-    add_middle(PLAYER , 1 , player->textureRect , player->rect , player->playerTexture);
+    load_map();
+    add_group(PLAYER , 1 , player->textureRect , player->rect , player->playerTexture);
     return 1;
 }

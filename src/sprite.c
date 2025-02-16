@@ -1,6 +1,7 @@
 #include "sprite.h"
 
-Sprite_node *mapRoot, *middleRoot, *uiRoot;
+Sprite_node *group[GROUP_MAX];
+
 
 
 void update(SDL_Surface *surface)
@@ -9,29 +10,20 @@ void update(SDL_Surface *surface)
 
     Sprite_node *p;
 
-    p = mapRoot;
-    while (p != NULL)
-    {
-        SDL_BlitSurface(p->tetureSurface , p->srcRect , surface , p->dstRect);
-        p = p->next;
+    draw_map(surface);
+
+    for (int i = 0 ; i < GROUP_MAX ; i++){
+        p = group[i];
+        while (p != NULL)
+        {
+            SDL_BlitSurface(p->tetureSurface , p->srcRect , surface , p->dstRect);
+            p = p->next;
+        }
     }
 
-    p = middleRoot;
-    while (p != NULL)
-    {
-        SDL_BlitSurface(p->tetureSurface , p->srcRect , surface , p->dstRect);
-        p = p->next;
-    }
-
-    p = uiRoot;
-    while (p != NULL)
-    {
-        SDL_BlitSurface(p->tetureSurface , p->srcRect , surface , p->dstRect);
-        p = p->next;
-    }
 }
 
-void add_map(Struct_type structType , Uint32 id ,SDL_Rect *srcRect , SDL_Rect *destRect , SDL_Surface *textureSurface)
+void add_group(Struct_type structType , Uint32 id ,SDL_Rect *srcRect , SDL_Rect *destRect , SDL_Surface *textureSurface)
 {
     Sprite_node *p , *q , *r;
 
@@ -44,44 +36,15 @@ void add_map(Struct_type structType , Uint32 id ,SDL_Rect *srcRect , SDL_Rect *d
     q->tetureSurface = textureSurface;
     q->next = NULL;
 
-    p = mapRoot;
+    p = group[structType];
     while (p != NULL)
     {
         r = p;
         p = p->next;
     }
 
-    if(mapRoot == NULL){
-        mapRoot = q;
-    }
-    else{
-        r->next = q;
-    }
-    
-}
-
-void add_middle(Struct_type structType , Uint32 id ,SDL_Rect *srcRect , SDL_Rect *destRect , SDL_Surface *textureSurface)
-{
-    Sprite_node *p , *q , *r;
-
-    q = (Sprite_node *)malloc(sizeof(Sprite_node));
-
-    q->structType = structType;
-    q->spriteId = id;
-    q->srcRect = srcRect;
-    q->dstRect = destRect;
-    q->tetureSurface = textureSurface;
-    q->next = NULL;
-
-    p = middleRoot;
-    while (p != NULL)
-    {
-        r = p;
-        p = p->next;
-    }
-
-    if(middleRoot == NULL){
-        middleRoot = q;
+    if(group[structType] == NULL){
+        group[structType] = q;
     }
     else{
         r->next = q;
@@ -90,38 +53,11 @@ void add_middle(Struct_type structType , Uint32 id ,SDL_Rect *srcRect , SDL_Rect
 }
 
 
-void add_ui(Struct_type structType , Uint32 id ,SDL_Rect *srcRect , SDL_Rect *destRect , SDL_Surface *textureSurface)
-{
-    Sprite_node *p , *q , *r;
 
-    q = (Sprite_node *)malloc(sizeof(Sprite_node));
-
-    q->structType = structType;
-    q->spriteId = id;
-    q->srcRect = srcRect;
-    q->dstRect = destRect;
-    q->tetureSurface = textureSurface;
-    q->next = NULL;
-
-    p = uiRoot;
-    while (p != NULL)
-    {
-        r = p;
-        p = p->next;
-    }
-
-    if(uiRoot == NULL){
-        uiRoot = q;
-    }
-    else{
-        r->next = q;
-    }
-    
-}
 
 void sprite_init(void)
 {
-    mapRoot = NULL;
-    middleRoot = NULL;
-    uiRoot = NULL;
+    for (int i = 0 ; i < GROUP_MAX ; i++){
+        group[i] = NULL;
+    }
 }

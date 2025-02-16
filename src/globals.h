@@ -12,4 +12,5 @@ extern int player_speed; //スピード
 
 extern uint16_t flameDlay;
 
+
 #endif
