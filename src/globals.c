@@ -21,3 +21,5 @@ Tile *tiles[TILE_KIND];
 
 Uint8 mapData[MAP_HEIGHT][MAP_WIHTH]; //マップの情報を格納
 
+Uint16 noMoveX;
+Uint16 noMoveY;

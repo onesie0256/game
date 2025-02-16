@@ -8,8 +8,8 @@ Player* load_player(void)
     p = (Player *)malloc(sizeof(Player));
 
     p->rect = (SDL_Rect *)malloc(sizeof(SDL_Rect));
-    p->rect->x = 500;//大きさ:64x64 初期座標:(0,0)
-    p->rect->y = 500;
+    p->rect->x = 1200;//大きさ:64x64 初期座標:(0,0)
+    p->rect->y = 1200;
     p->rect->w = 64;
     p->rect->h = 64;
     
@@ -47,11 +47,11 @@ void player_move(int dire)
         break;
     
     case West:
-        player->rect->x -= player_speed;
+        player->rect->x = (player->rect->x <= player_speed) ? 0 : player->rect->x - player_speed;
         break;
 
     case North:
-        player->rect->y -= player_speed;
+        player->rect->y = (player->rect->y <= player_speed) ? 0 : player->rect->y - player_speed;
         break;
 
     case South:
@@ -64,8 +64,8 @@ void player_move(int dire)
         break;
 
     case NorthWest:
-        player->rect->x -= player_speed;
-        player->rect->y -= player_speed;
+        player->rect->x = (player->rect->x <= player_speed) ? 0 : player->rect->x - player_speed;
+        player->rect->y = (player->rect->y <= player_speed) ? 0 : player->rect->y - player_speed;
         break;
 
     case SouthEast:

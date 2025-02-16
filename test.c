@@ -56,6 +56,11 @@ int main(int argc , char *argv[])
     
 }
 
+Uint8 marginX;
+Uint8 marginY;
+
+Uint16 startX;
+Uint16 startY;
 
 
 

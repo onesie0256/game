@@ -20,7 +20,8 @@ typedef struct sprite_node{
     Uint32 spriteId;//id
 
     SDL_Rect *srcRect;
-    SDL_Rect *dstRect;
+    SDL_Rect *rect;
+    SDL_Rect *drawRect;
 
     SDL_Surface *tetureSurface;//画像へのポインタ
 
@@ -46,4 +47,7 @@ void sprite_init(void);
 
 void map_draw(void);
 
+void get_drawRect(SDL_Rect *rect , SDL_Rect *drawRect, Uint16 drawMarginX , Uint16 drawMarginY);
+
+void get_player_drawRect(SDL_Rect *rect , SDL_Rect *drawRect);
 #endif

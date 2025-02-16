@@ -11,4 +11,13 @@ void load_map(void);
 
 void draw_map(SDL_Surface *surface);
 
+
+extern Uint16 noMoveX;
+extern Uint16 noMoveY;
+
+extern Uint8 marginX;
+extern Uint8 marginY;
+
+extern Uint16 startX;
+extern Uint16 startY;
 #endif
