@@ -8,12 +8,12 @@
 #include <stdio.h>
 
 //SDL関連
-#include <SDL/SDL.h>
-#include <SDL/SDL_image.h>
-#include <SDL/SDL_mixer.h>
-#include <SDL/SDL_ttf.h>
-#include <SDL/SDL_gfxPrimitives.h>
-#include <SDL/SDL_net.h>
+#include <SDL2/SDL.h>
+#include <SDL2/SDL_image.h>
+#include <SDL2/SDL_mixer.h>
+#include <SDL2/SDL_ttf.h>
+//#include <SDL/SDL_gfxPrimitives.h>
+//#include <SDL/SDL_net.h>
 
 //srcディレクトリ
 #include "colors.h"
@@ -36,7 +36,8 @@
 #include "util/image_utils.h"
 #include "util/key_and_mouse_utils.h"
 
-
+//uiディレクトリ
+//#include "ui/menu.h"
 
 
 

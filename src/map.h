@@ -9,7 +9,7 @@ extern Uint8 mapData[MAP_HEIGHT][MAP_WIHTH];
 
 void load_map(void);
 
-void draw_map(SDL_Surface *surface);
+void draw_map(void);
 
 
 extern Uint16 noMoveX;

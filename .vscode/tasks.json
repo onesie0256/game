@@ -13,12 +13,12 @@
                 "-o",
                 "${fileDirname}/game",
                 "-I/usr/include/SDL2",
-                "-lSDL",
+                "-lSDL2",
                 "-L/usr/lib",
                 "-lSDL_gfx",
-                "-lSDL_ttf",
-                "-lSDL_mixer",
-                "-lSDL_image"
+                "-lSDL2_ttf",
+                "-lSDL2_mixer",
+                "-lSDL2_image"
 
             ],
             "options": {

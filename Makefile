@@ -10,7 +10,7 @@ OBJS = $(SRCS:.c=.o)
 TARGET = game
 
 $(TARGET): $(OBJS)
-	$(CC) $(OBJS) -o $(TARGET) -lSDL -lSDL_mixer -lSDL_ttf -lSDL_image -fPIC
+	$(CC) $(OBJS) -o $(TARGET) -lSDL2 -lSDL2_mixer -lSDL2_ttf -lSDL2_image -fPIC
 
 %.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@

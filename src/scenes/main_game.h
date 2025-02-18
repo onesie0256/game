@@ -18,6 +18,6 @@ typedef enum directions{
     SouthEast
 }Directions;
 
-
+void free_main_game(void);
 
 #endif

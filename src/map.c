@@ -13,7 +13,7 @@ void load_map(void){
     mapData[0][0] = collision_tile;
 }
 
-void draw_map(SDL_Surface *surface)
+void draw_map(void)
 {
     //SDL_Surface *mapBuffer = SDL_CreateRGBSurface(SDL_SWSURFACE , SCREEN_WIDTH , SCREEN_HEIGHT , 32 , 0xff000000 , 0x00ff0000 , 0x0000ff00 , 0x000000ff);
 
@@ -52,7 +52,8 @@ void draw_map(SDL_Surface *surface)
         for (int j = startX ; j < startX + 40 ; j++){
             Uint8 tileId = mapData[i][j];
             SDL_Rect dst_rect = {.x = (j - startX) * TILE_SIZE - marginX , .y = (i - startY) * TILE_SIZE - marginY , .w = TILE_SIZE, .h = TILE_SIZE};
-            SDL_BlitSurface(tiles[tileId]->tileTexture , &tileRect , surface , &dst_rect);
+            //SDL_BlitSurface(tiles[tileId]->tileTexture , &tileRect , surface , &dst_rect);
+            SDL_RenderCopy(renderer , tiles[tileId]->tileTexture , &tileRect , &dst_rect);
         }
     }
 

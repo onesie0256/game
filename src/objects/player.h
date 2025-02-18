@@ -10,19 +10,19 @@ typedef struct player_{
     //向き
     int dire;
     
-    SDL_Surface *playerTexture; //テクスチャ
+    SDL_Texture *playerTexture; //テクスチャ
     SDL_Rect *textureRect;
 
-    SDL_Surface *playerTextureIdle;//テクスチャ(アイドル時)
+    SDL_Texture *playerTextureIdle;//テクスチャ(アイドル時)
     SDL_Rect idleRect;
     int idleFlameNum;
 
-    SDL_Surface *playerTextureRunning;//テクスチャ(移動中)
+    SDL_Texture *playerTextureRunning;//テクスチャ(移動中)
     SDL_Rect runningRect;
     int runningFlameNum;
     
 
-    SDL_Surface *playerTexureInterect;//テクスチャ()
+    SDL_Texture *playerTexureInterect;//テクスチャ()
     SDL_Rect interectRect;
     int InterectFlameNum;
 
@@ -32,6 +32,8 @@ typedef struct player_{
 Player* load_player(void);
 
 void player_move(int dire);
+
+void free_player(void);
 
 extern Player *player;
 #endif

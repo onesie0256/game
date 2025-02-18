@@ -4,14 +4,16 @@ Sprite_node *group[GROUP_MAX];
 
 
 
-void update(SDL_Surface *surface)
+void update(void)
 {
 
-    SDL_FillRect(surface , NULL , SDL_MapRGBA(surface -> format , 240 , 255 , 255 , 255));//一番奥の背景を塗りつぶし 0xf0ffff
+    //SDL_FillRect(surface , NULL , SDL_MapRGBA(surface -> format , 240 , 255 , 255 , 255));//一番奥の背景を塗りつぶし 0xf0ffff
+    SDL_SetRenderDrawColor(renderer, 240, 255, 255, 255);
+    SDL_RenderClear(renderer);
 
     Sprite_node *p;
 
-    draw_map(surface);
+    draw_map();
 
     //int drawMarginX = -startX * TILE_SIZE - marginX;
     //int drawMarginY = -startY * TILE_SIZE - marginY;
@@ -29,14 +31,15 @@ void update(SDL_Surface *surface)
             }
             */
             get_player_drawRect(p->rect , p->drawRect);
-            SDL_BlitSurface(p->tetureSurface , p->srcRect , surface , p->drawRect);
+            //SDL_BlitSurface(p->tetureSurface , p->srcRect , surface , p->drawRect);
+            SDL_RenderCopy(renderer , p->tetureSurface , p->srcRect , p->drawRect);
             p = p->next;
         }
     }
 
 }
 
-void add_group(Struct_type structType , Uint32 id ,SDL_Rect *srcRect , SDL_Rect *rect , SDL_Surface *textureSurface)
+void add_group(Struct_type structType , Uint32 id ,SDL_Rect *srcRect , SDL_Rect *rect , SDL_Texture *textureSurface)
 {
     Sprite_node *p , *q , *r;
 
@@ -83,7 +86,7 @@ void sprite_init(void)
     }
 }
 
-void get_drawRect(SDL_Rect *rect , SDL_Rect *drawRect , Uint16 drawMarginX , Uint16 drawMarginY )
+void get_drawRect(SDL_Rect *rect , SDL_Rect *drawRect , Uint16 drawMarginX , Uint16 drawMarginY)
 {
     drawRect->x = rect->x + drawMarginX;
     drawRect->y = rect->y + drawMarginY;
@@ -93,4 +96,22 @@ void get_player_drawRect(SDL_Rect *rect , SDL_Rect *drawRect)
 {
     drawRect->x = player->rect->x < noMoveX ? player->rect->x : (noMoveX);
     drawRect->y = player->rect->y < noMoveY ? player->rect->y : (noMoveY);
+}
+
+void free_group(void)
+{
+    Sprite_node *p , *q;
+
+    for (int i = 0 ; i < GROUP_MAX ; i++){
+        p = group[i];
+        while (p != NULL){
+            q = p;
+            free(p->drawRect);
+            free(p->rect);
+            //free(p->srcRect);
+            SDL_DestroyTexture(p->tetureSurface);
+            p = p->next;
+            free(q);
+        }
+    }
 }

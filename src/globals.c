@@ -4,8 +4,11 @@
 #include "globals.h"
 
 
-SDL_Surface *window; 
-SDL_Surface *buffer;
+//SDL_Surface *window; 
+//SDL_Surface *buffer;
+
+SDL_Renderer *renderer; //メインレンダラー
+SDL_Window *window;
 
 SDL_Event event;
 

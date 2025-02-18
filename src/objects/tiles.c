@@ -34,7 +34,7 @@ int load_tile(void) {
         Tile *tile = (Tile *)malloc(sizeof(Tile));
         tile->id = id;
         tile->tileName = strdup(tileName); // タイル名をコピー
-        tile->tileTexture = SDL_LoadBMP(fullPath); // テクスチャを読み込む
+        tile->tileTexture = SDL_CreateTextureFromSurface(renderer ,  SDL_LoadBMP(fullPath)); // テクスチャを読み込む
         tile->isCollision = (isCollisionTemp == 1) ? SDL_TRUE : SDL_FALSE;
 
         // tiles配列に格納
@@ -43,4 +43,15 @@ int load_tile(void) {
 
     fclose(tileDataFile);
     return 1; // 成功
+}
+
+void free_tiles(void)
+{
+    Tile *p;
+    for (int i = 0 ; i < TILE_KIND ; i++){
+        p = tiles[i];
+        free(p->tileName);
+        SDL_DestroyTexture(p->tileTexture);
+        free(p);
+    }
 }

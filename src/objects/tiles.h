@@ -14,12 +14,14 @@ typedef struct tile{
 
     Uint8 id;
     char *tileName;
-    SDL_Surface *tileTexture;
+    SDL_Texture *tileTexture;
     SDL_bool isCollision; //プレイヤーなどが衝突するかどうか
 
 }Tile;
 
 int load_tile(void); //グローバル変数tiles[]にタイルの情報を格納
+
+void free_tiles(void);
 
 extern Tile *tiles[TILE_KIND];
 

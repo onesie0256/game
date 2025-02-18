@@ -1,0 +1,19 @@
+#include "menu.h"
+
+int menu(void *data)
+{
+    SDL_Surface *surface = (SDL_Surface *)data;
+
+    TTF_Font *fontMenu , *fontOption;
+    SDL_Surface *menuback ,*strMenu , *strQuitGame;
+
+    fontMenu = TTF_OpenFont("./assets/fonts/azuki.ttf", 60);
+    fontOption = TTF_OpenFont("./assets/fonts/azuki.ttf", 60);
+
+
+
+    str
+
+
+
+}

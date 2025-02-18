@@ -20,10 +20,11 @@ int main(int argc , char *argv[])
 
 
     //ウィンドウ設定
-    if ((window = SDL_SetVideoMode(SCREEN_WIDTH, SCREEN_HEIGHT, 32, SDL_SWSURFACE)) == NULL){
+    /*if ((window = SDL_SetVideoMode(SCREEN_WIDTH, SCREEN_HEIGHT, 32, SDL_SWSURFACE)) == NULL){
         printf("failed to initialize window. \n%s\n" , Mix_GetError());
         exit(-1);
     }
+
     if ((buffer = SDL_CreateRGBSurface(SDL_HWSURFACE , SCREEN_WIDTH , SCREEN_HEIGHT , 32  , 0 , 0 , 0, 0)) == NULL){
         printf("failed to initialize buffer. \n%s\n" , Mix_GetError());
         exit(-1);
@@ -39,8 +40,13 @@ int main(int argc , char *argv[])
     }
     
     
+    */
     
-    
+    //ウィンドウ設定
+    window = SDL_CreateWindow("SDL Window",SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,1920, 1080, SDL_WINDOW_SHOWN);
+
+    //レンダラー設定
+    renderer = SDL_CreateRenderer(window , -1 , SDL_RENDERER_ACCELERATED);
 
     int isLoop = title();
     while (isLoop)
@@ -50,6 +56,9 @@ int main(int argc , char *argv[])
             isLoop = title();
         }
     }
+
+    SDL_DestroyRenderer(renderer);
+    SDL_DestroyWindow(window);
 
     SDL_QuitSubSystem(SDL_INIT_EVERYTHING);
     SDL_Quit();

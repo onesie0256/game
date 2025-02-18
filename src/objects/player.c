@@ -23,14 +23,14 @@ Player* load_player(void)
     p->textureRect = &(p->idleRect);
     //player -> direction = East;
 
-    p->playerTextureIdle = SDL_LoadBMP("assets/img/player_test.bmp");
+    p->playerTextureIdle = SDL_CreateTextureFromSurface(renderer , SDL_LoadBMP("assets/img/player_test.bmp"));
     if (p->playerTextureIdle == NULL) {
         printf("%s\n" , IMG_GetError());
         exit(-1);
         SDL_Delay(100);
         return NULL;
     }
-    SDL_SetColorKey(p->playerTextureIdle , SDL_SRCCOLORKEY , -1);
+    //SDL_SetColorKey(p->playerTextureIdle , SDL_SetColorKey , -1);
 
     p->playerTexture = p->playerTextureIdle;
     p->idleFlameNum = 1;
@@ -81,4 +81,11 @@ void player_move(int dire)
     default:
         break;
     }
+}
+
+void free_player(void)
+{
+    //free(player->rect);
+    SDL_DestroyTexture(player->playerTextureIdle);
+    free(player);
 }
