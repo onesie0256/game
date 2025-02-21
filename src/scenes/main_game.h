@@ -20,4 +20,6 @@ typedef enum directions{
 
 void free_main_game(void);
 
+extern SDL_bool isMenuOpening;
+
 #endif

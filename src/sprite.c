@@ -30,16 +30,17 @@ void update(void)
                 get_drawRect(p->rect , p->drawRect , drawMarginX , drawMarginY);
             }
             */
-            get_player_drawRect(p->rect , p->drawRect);
-            //SDL_BlitSurface(p->tetureSurface , p->srcRect , surface , p->drawRect);
-            SDL_RenderCopy(renderer , p->tetureSurface , p->srcRect , p->drawRect);
+            if (p->isDisplay = SDL_TRUE){
+                get_player_drawRect(p->rect , p->drawRect);
+                SDL_RenderCopy(renderer , p->tetureSurface , p->srcRect , p->drawRect);
+            }
             p = p->next;
         }
     }
 
 }
 
-void add_group(Struct_type structType , Uint32 id ,SDL_Rect *srcRect , SDL_Rect *rect , SDL_Texture *textureSurface)
+Sprite_node* add_group(Struct_type structType , Uint32 id , SDL_bool isDisplay , SDL_Rect *srcRect , SDL_Rect *rect , SDL_Texture *textureSurface)
 {
     Sprite_node *p , *q , *r;
 
@@ -47,6 +48,7 @@ void add_group(Struct_type structType , Uint32 id ,SDL_Rect *srcRect , SDL_Rect 
 
     q->structType = structType;
     q->spriteId = id;
+    q->isDisplay = isDisplay;
     q->srcRect = srcRect;
     q->rect = rect;
     q->drawRect = (SDL_Rect *)malloc(sizeof(SDL_Rect));
@@ -74,6 +76,7 @@ void add_group(Struct_type structType , Uint32 id ,SDL_Rect *srcRect , SDL_Rect 
         r->next = q;
     }
     
+    return q;
 }
 
 

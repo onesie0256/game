@@ -4,5 +4,7 @@
 
 int menu(void *data);
 
+void load_menu(void);
+
 
 #endif

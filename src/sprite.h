@@ -21,6 +21,8 @@ typedef struct sprite_node{
     Struct_type structType;//表示するやつの型
     Uint32 spriteId;//id
 
+    SDL_bool isDisplay; //見えるかどうか
+
     SDL_Rect *srcRect;
     SDL_Rect *rect;
     SDL_Rect *drawRect;
@@ -28,6 +30,7 @@ typedef struct sprite_node{
     SDL_Texture *tetureSurface;//画像へのポインタ
 
     struct sprite_node *next;//次のポインタ
+
 
 }Sprite_node;
 
@@ -41,7 +44,7 @@ void update(void);
 
 //void add_ui(Struct_type structType , Uint32 id ,SDL_Rect *srcRect , SDL_Rect *destRect , SDL_Surface *textureSurface);
 */
-void add_group(Struct_type structType , Uint32 id ,SDL_Rect *srcRect , SDL_Rect *destRect , SDL_Texture *textureSurface);//転送前、転送後
+Sprite_node* add_group(Struct_type structType , Uint32 id , SDL_bool isDisplay , SDL_Rect *srcRect , SDL_Rect *destRect , SDL_Texture *textureSurface);//転送前、転送後
 
 void load_map(void);
 

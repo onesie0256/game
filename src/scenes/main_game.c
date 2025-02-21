@@ -4,10 +4,13 @@ int main_game(void)
 {
     load_main_game();
     //SDL_EnableKeyRepeat(10 , 10);
-    
-    while (1){
+    Uint8 runningState = 0;
 
-        SDL_bool isMenuOpening = SDL_FALSE;
+    SDL_bool isMenuOpening = SDL_FALSE;
+
+    while (runningState == 0){
+
+        
         if (isMenuOpening == SDL_FALSE){
             if (SDL_PollEvent(&event)){
                 switch (event.type)
@@ -21,11 +24,10 @@ int main_game(void)
                     switch (event.key.keysym.sym)
                     {
                         case SDLK_ESCAPE:
-                        //SDL_Thread *menuThr;
-                        //menuThr = SDL_CreateThread(menu , (void *)window);
-                        //isMenuOpening = SDL_TRUE;
+                        SDL_Thread *menuThr;
+                        menuThr = SDL_CreateThread(menu, "nemuThr", (void *)runningState);
+                        isMenuOpening = SDL_TRUE;
                         
-                        //menu(window);
                         break;
 
                         default:
@@ -56,7 +58,8 @@ int load_main_game(void)
     player = load_player();
     sprite_init();
     load_map();
-    add_group(PLAYER , 1 , player->textureRect , player->rect , player->playerTexture);
+    add_group(PLAYER , 1 ,SDL_TRUE , player->textureRect , player->rect , player->playerTexture);
+    load_menu();
     return 1;
 }
 

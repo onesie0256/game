@@ -37,7 +37,7 @@
 #include "util/key_and_mouse_utils.h"
 
 //uiディレクトリ
-//#include "ui/menu.h"
+#include "ui/menu.h"
 
 
 
