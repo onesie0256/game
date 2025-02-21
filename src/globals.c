@@ -8,6 +8,9 @@
 //SDL_Surface *buffer;
 
 SDL_Renderer *renderer; //メインレンダラー
+
+SDL_mutex *mutex;
+
 SDL_Window *window;
 
 SDL_Event event;
@@ -26,3 +29,5 @@ Uint8 mapData[MAP_HEIGHT][MAP_WIHTH]; //マップの情報を格納
 
 Uint16 noMoveX;
 Uint16 noMoveY;
+
+SDL_bool isMenuOpening;

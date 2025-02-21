@@ -2,20 +2,17 @@
 
 
 TTF_Font *fontMenu , *fontOption;
-SDL_Texture *menuTex , *menubackTex ,*strMenuTex , *strRuturnTitleTex,*strQuitGameTex;
-
-SDL_Renderer *menuRenderer;
+SDL_Texture *menuTex , *menubackTex;
+String_Texture *strMenuTex , *strReturnTitleTex,*strQuitGameTex;
 
 Sprite_node *menuSprite;
-
-void load_menu(void);
 
 void free_menu(void);
 
 int menu(void *data)
 {
 
-    Uint8 *mainRunningState = (int *)data;
+    Uint8 *mainRunningState = (Uint8 *)data;
 
     int isLoop = 1;
     menuSprite->isDisplay = SDL_TRUE;
@@ -27,13 +24,14 @@ int menu(void *data)
             {
             case SDL_QUIT:
                 isLoop = 0;
-                mainRunningState = 2;
+                *mainRunningState = 2;
+                free_menu();
                 break;
             
             case SDL_MOUSEBUTTONDOWN:
                 if (is_in_square4(SCREEN_WIDTH / 2 , SCREEN_HEIGHT * 6 / 8.0 , SCREEN_WIDTH , SCREEN_HEIGHT * 7 / 8.0 - 1)){
                     isLoop = 0;
-                    mainRunningState = 1;
+                    *mainRunningState = 1;
                     
 
                 }
@@ -42,6 +40,7 @@ int menu(void *data)
             case SDL_KEYDOWN:
                 if (event.key.keysym.sym == SDLK_ESCAPE){
                     menuSprite->isDisplay = SDL_FALSE;
+                    free_menu();
                     isMenuOpening = SDL_FALSE;
                     return 0;
                 }
@@ -65,22 +64,17 @@ int menu(void *data)
 void load_menu(void)
 {
 
-    fontMenu = TTF_OpenFont("./assets/fonts/azuki.ttf", 60);
-    fontOption = TTF_OpenFont("./assets/fonts/azuki.ttf", 60);
+    //fontMenu = TTF_OpenFont("./assets/fonts/azuki.ttf", 60);
+    //fontOption = TTF_OpenFont("./assets/fonts/azuki.ttf", 60);
 
-    menuRenderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
+    //menuRenderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
 
     
 
 
-    menuTex = SDL_CreateTexture(menuRenderer, SDL_PIXELFORMAT_RGBA8888, SDL_TEXTUREACCESS_TARGET, SCREEN_WIDTH / 2, SCREEN_HEIGHT);
+    menuTex = SDL_CreateTexture(renderer, SDL_PIXELFORMAT_RGBA8888, SDL_TEXTUREACCESS_TARGET, SCREEN_WIDTH / 2, SCREEN_HEIGHT);
     SDL_Surface *menuback = SDL_LoadBMP("assets/img/ui/menu_back.bmp");
-    menubackTex = SDL_CreateTextureFromSurface(menuRenderer , menuback);
-
-
-
-    SDL_SetRenderTarget(menuRenderer, menuTex);
-    
+    menubackTex = SDL_CreateTextureFromSurface(renderer , menuback);
 
     SDL_Rect *menuSrcRect = (SDL_Rect *)malloc(sizeof(SDL_Rect));
     menuSrcRect->x = 0;
@@ -94,19 +88,23 @@ void load_menu(void)
     menuDstRect->w = menuback->w;
     menuDstRect->h = menuback->h;
 
-    SDL_Surface *strRuturnTitle = TTF_RenderText_Blended(fontOption , "タイトルに戻る" , colors_white);
-    strRuturnTitleTex = SDL_CreateTextureFromSurface(renderer , strRuturnTitle);
-    SDL_Rect sRTsrc = {.x = 0 , .y = 0 , .w = strRuturnTitle->w , .h = strRuturnTitle->h};
-    SDL_Rect sRTdst = {.x = SCREEN_WIDTH / 2 , .y = SCREEN_HEIGHT * 6 / 8.0 , .w = strRuturnTitle->w , .h = strRuturnTitle->h};
     
-    SDL_RenderCopy(menuRenderer , menubackTex , menuSrcRect , menuSrcRect);
-    SDL_RenderCopy(menuRenderer , strRuturnTitleTex , &sRTsrc , &sRTdst);
+    SDL_Rect sRTdst = {.x = menuback->w * 1 / 3.0 , .y = menuback->h * 6 / 8.0};
+    strReturnTitleTex = make_string_tex(1 , colors_white , 60 , "タイトルにもどる" , menuTex , &sRTdst);
+    
+    SDL_SetRenderTarget(renderer , menuTex);
+    SDL_RenderCopy(renderer , menubackTex , menuSrcRect , menuSrcRect);
+    SDL_RenderCopy(renderer , strReturnTitleTex->texture , strReturnTitleTex->srcRect , strReturnTitleTex->dstRect);
+    SDL_SetRenderTarget(renderer , NULL);
+
 
     menuSprite = add_group(UI2 , 101 , SDL_FALSE , menuSrcRect , menuDstRect , menuTex);
-
+    SDL_FreeSurface(menuback);
 }
 
 void free_menu(void)
 {
+    free_string_tex(strReturnTitleTex);
 
+    SDL_DestroyTexture(menubackTex);
 }

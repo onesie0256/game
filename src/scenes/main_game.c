@@ -6,7 +6,9 @@ int main_game(void)
     //SDL_EnableKeyRepeat(10 , 10);
     Uint8 runningState = 0;
 
-    SDL_bool isMenuOpening = SDL_FALSE;
+    isMenuOpening = SDL_FALSE;
+
+
 
     while (runningState == 0){
 
@@ -25,7 +27,8 @@ int main_game(void)
                     {
                         case SDLK_ESCAPE:
                         SDL_Thread *menuThr;
-                        menuThr = SDL_CreateThread(menu, "nemuThr", (void *)runningState);
+                        menuThr = SDL_CreateThread(menu, "nemuThr", &runningState);
+                        SDL_DetachThread(menuThr);
                         isMenuOpening = SDL_TRUE;
                         
                         break;
@@ -51,6 +54,14 @@ int main_game(void)
         SDL_RenderPresent(renderer);
         SDL_Delay(10);
     }
+
+    free_main_game();
+
+    if (runningState == 1){
+        return 1;
+    }
+    
+    return 0;
 }
 
 int load_main_game(void)

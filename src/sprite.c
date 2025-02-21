@@ -8,6 +8,9 @@ void update(void)
 {
 
     //SDL_FillRect(surface , NULL , SDL_MapRGBA(surface -> format , 240 , 255 , 255 , 255));//一番奥の背景を塗りつぶし 0xf0ffff
+
+    SDL_LockMutex(mutex);
+
     SDL_SetRenderDrawColor(renderer, 240, 255, 255, 255);
     SDL_RenderClear(renderer);
 
@@ -18,7 +21,7 @@ void update(void)
     //int drawMarginX = -startX * TILE_SIZE - marginX;
     //int drawMarginY = -startY * TILE_SIZE - marginY;
 
-    for (int i = 0 ; i < GROUP_MAX ; i++){
+    for (int i = 0 ; i <= 3 ; i++){
         p = group[i];
         while (p != NULL)
         {
@@ -30,14 +33,32 @@ void update(void)
                 get_drawRect(p->rect , p->drawRect , drawMarginX , drawMarginY);
             }
             */
-            if (p->isDisplay = SDL_TRUE){
+            if (p->isDisplay == SDL_TRUE){
                 get_player_drawRect(p->rect , p->drawRect);
                 SDL_RenderCopy(renderer , p->tetureSurface , p->srcRect , p->drawRect);
             }
             p = p->next;
         }
     }
-
+    for (int i = 4 ; i < GROUP_MAX ; i++){
+        p = group[i];
+        while (p != NULL)
+        {
+            /*
+            if (p->structType == PLAYER){
+                get_player_drawRect(p->rect , p->drawRect , drawMarginX , drawMarginY);
+            }
+            else {
+                get_drawRect(p->rect , p->drawRect , drawMarginX , drawMarginY);
+            }
+            */
+            if (p->isDisplay == SDL_TRUE){
+                SDL_RenderCopy(renderer , p->tetureSurface , p->srcRect , p->rect);
+            }
+            p = p->next;
+        }
+    }
+    SDL_UnlockMutex(mutex);
 }
 
 Sprite_node* add_group(Struct_type structType , Uint32 id , SDL_bool isDisplay , SDL_Rect *srcRect , SDL_Rect *rect , SDL_Texture *textureSurface)

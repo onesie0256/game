@@ -160,7 +160,7 @@ int title(void)
                         return 1;
                     }
                     else if(is_in_square(SCREEN_WIDTH * (5 / 8.0) , SCREEN_HEIGHT * (7 / 8.0) , SCREEN_WIDTH , SCREEN_HEIGHT)){
-                        Mix_PlayChannel(-1 , seClick1 , 2);
+                        Mix_PlayChannel(-1 , seClick1 , 1);
 
                         for (int i = 1 ; i <= 50 ; i++){
                         SDL_Rect src_rect = {0 , 0 , strings -> w , strings -> h};

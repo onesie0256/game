@@ -8,6 +8,8 @@
 
 extern SDL_Renderer *renderer; //メインレンダラー
 
+extern SDL_mutex *mutex;
+
 extern SDL_Window *window;
 
 extern SDL_Event event; //イベント

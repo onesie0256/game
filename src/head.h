@@ -35,14 +35,10 @@
 //utilディレクトリ
 #include "util/image_utils.h"
 #include "util/key_and_mouse_utils.h"
+#include "util/string_tex_util.h"
 
 //uiディレクトリ
 #include "ui/menu.h"
-
-
-
-
-//グローバル変数の定義
 
 
 #endif

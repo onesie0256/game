@@ -18,6 +18,8 @@ int main(int argc , char *argv[])
         exit(-1);
     }
 
+    mutex = SDL_CreateMutex();
+
 
     //ウィンドウ設定
     /*if ((window = SDL_SetVideoMode(SCREEN_WIDTH, SCREEN_HEIGHT, 32, SDL_SWSURFACE)) == NULL){
@@ -56,6 +58,8 @@ int main(int argc , char *argv[])
             isLoop = title();
         }
     }
+
+    SDL_DestroyMutex(mutex);
 
     SDL_DestroyRenderer(renderer);
     SDL_DestroyWindow(window);
